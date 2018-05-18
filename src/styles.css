@@ -5,7 +5,7 @@ body{
 }
 
 hr{
-  border-color: white;
+  border-color: white !important;
 }
 
 .jumbotron{
