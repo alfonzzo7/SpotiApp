@@ -19,10 +19,7 @@ export class SearchComponent implements OnInit {
     if(this.termino.length == 0){
       return;
     }else{
-      this._spotify.getArtistas(this.termino)
-        .subscribe(data => {
-          console.log(data);
-        });
+      this._spotify.getArtistas(this.termino).subscribe();
     }
   }
 

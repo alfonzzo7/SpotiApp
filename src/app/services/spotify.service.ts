@@ -7,16 +7,26 @@ export class SpotifyService {
 
   artistas:any[] = [];
 
+  urlSpotify:string = "https://api.spotify.com/v1/";
+
+  token:string = "BQBFE8-jOHPAY6cS2RaG6nUaeO1Mnc0Ykab01rjgkVhZAwg4JTejTz4RVu8I2qTZ-hNnr_L_gUzF341u1r0";
+
+  private getHeaders():HttpHeaders{
+    let headers =  new HttpHeaders({
+      'authorization': `Bearer ${this.token}`
+    });
+
+    return headers;
+  }
+
   constructor(public httpClient:HttpClient) {
     console.log("SpotifyService Listo");
   }
 
   getArtistas(termino:string){
-    let url = `https://api.spotify.com/v1/search?query=${termino}&type=artist&limit=20`;
+    let url = `${this.urlSpotify}search?query=${termino}&type=artist&limit=20`;
 
-    let headers =  new HttpHeaders({
-      'authorization': 'Bearer BQAKbEHijFH_7WrOhL1KjjkPxAaY5cNg9B2ho4E1FOZ1g5XB85KBpu-BZ1SkSquqw1nKuTJyr_n-IUl4CGY'
-    });
+    let headers =  this.getHeaders();
 
     return this.httpClient.get(url, {headers:headers})
                .map((data:any) => {
@@ -25,4 +35,26 @@ export class SpotifyService {
                });
   }
 
+  getArtista(id:string){
+    let url = `${this.urlSpotify}artists/${id}`;
+
+    let headers =  this.getHeaders();
+
+    return this.httpClient.get(url, {headers:headers});
+               // .map((data:any) => {
+               //   this.artistas = data.artists.items;
+               //   return this.artistas;
+               // });
+  }
+
+  getTop(id:string){
+    let url = `${this.urlSpotify}artists/${id}/top-tracks?country=ES`;
+
+    let headers =  this.getHeaders();
+
+    return this.httpClient.get(url, {headers:headers})
+               .map((data:any) => {
+                 return data.tracks;
+               });
+  }
 }
