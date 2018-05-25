@@ -9,7 +9,7 @@ export class SpotifyService {
 
   urlSpotify:string = "https://api.spotify.com/v1/";
 
-  token:string = "BQBFE8-jOHPAY6cS2RaG6nUaeO1Mnc0Ykab01rjgkVhZAwg4JTejTz4RVu8I2qTZ-hNnr_L_gUzF341u1r0";
+  token:string = "BQB05kMakcTYeyFQznufCEkp_SVwBtHLGz98mXZlL11rE1qF9-BfO8UpSN30rX5I8cfL4ShFcnJQ6yR4WXs";
 
   private getHeaders():HttpHeaders{
     let headers =  new HttpHeaders({
