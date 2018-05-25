@@ -8,6 +8,14 @@ hr{
   border-color: white !important;
 }
 
+.card hr{
+  border-color: black !important;
+}
+
+.card{
+  color: black !important;
+}
+
 .jumbotron{
   background-color: #171717;
 }

@@ -7,15 +7,12 @@ export class SpotifyService {
 
   artistas:any[] = [];
 
-  urlSpotify:string = "https://api.spotify.com/v1/";
-
-  token:string = "BQB05kMakcTYeyFQznufCEkp_SVwBtHLGz98mXZlL11rE1qF9-BfO8UpSN30rX5I8cfL4ShFcnJQ6yR4WXs";
+  token:string = "BQA_lNJxEpWdhd1WjdlFVZdRIhqaO0uPwxj1csQ3_N3jVDWBdLBPtzx_JiiuEMEyZrLdhVCqPjXdkJVtpiw";
 
   private getHeaders():HttpHeaders{
     let headers =  new HttpHeaders({
       'authorization': `Bearer ${this.token}`
     });
-
     return headers;
   }
 
@@ -23,12 +20,20 @@ export class SpotifyService {
     console.log("SpotifyService Listo");
   }
 
+  getQuery(query:string){
+    const url:string = `https://api.spotify.com/v1/${query}`;
+    return this.httpClient.get(url, {headers:this.getHeaders()});
+  }
+
+  getNewReleases(){
+    return this.getQuery("browse/new-releases")
+               .map((data:any) => {
+                 return data.albums.items;
+               });
+  }
+
   getArtistas(termino:string){
-    let url = `${this.urlSpotify}search?query=${termino}&type=artist&limit=20`;
-
-    let headers =  this.getHeaders();
-
-    return this.httpClient.get(url, {headers:headers})
+    return this.getQuery(`search?query=${termino}&type=artist&limit=20`)
                .map((data:any) => {
                  this.artistas = data.artists.items;
                  return this.artistas;
@@ -36,11 +41,7 @@ export class SpotifyService {
   }
 
   getArtista(id:string){
-    let url = `${this.urlSpotify}artists/${id}`;
-
-    let headers =  this.getHeaders();
-
-    return this.httpClient.get(url, {headers:headers});
+    return this.getQuery(`artists/${id}`);
                // .map((data:any) => {
                //   this.artistas = data.artists.items;
                //   return this.artistas;
@@ -48,11 +49,7 @@ export class SpotifyService {
   }
 
   getTop(id:string){
-    let url = `${this.urlSpotify}artists/${id}/top-tracks?country=ES`;
-
-    let headers =  this.getHeaders();
-
-    return this.httpClient.get(url, {headers:headers})
+    return this.getQuery(`artists/${id}/top-tracks?country=ES`)
                .map((data:any) => {
                  return data.tracks;
                });
