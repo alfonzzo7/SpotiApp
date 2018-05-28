@@ -9,6 +9,7 @@ import { SpotifyService } from '../../services/spotify.service';
 export class SearchComponent implements OnInit {
 
   termino:string = "";
+  loading:boolean;
 
   constructor(public _spotify:SpotifyService) {}
 
@@ -19,7 +20,8 @@ export class SearchComponent implements OnInit {
     if(this.termino.length == 0){
       return;
     }else{
-      this._spotify.getArtistas(this.termino).subscribe();
+      this.loading = true;
+      this._spotify.getArtistas(this.termino).subscribe(data => this.loading = false);
     }
   }
 

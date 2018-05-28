@@ -8,10 +8,14 @@
               [(ngModel)]="termino"
               (keyup)="buscarArtista()">
     </div>
+
     <div class="col-md-9" *ngIf="termino.length > 1">
       <h1 class="text-capitalize">{{termino}}</h1>
       <hr>
-        <div class="row">
+
+        <app-loading *ngIf="loading"></app-loading>
+
+        <div *ngIf="!loading" class="row">
           <div *ngFor="let artista of _spotify.artistas"
                class="col-md-3 text-center puntero"
                [routerLink]="['/artist', artista.id]">

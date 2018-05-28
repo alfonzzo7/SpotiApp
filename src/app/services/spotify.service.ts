@@ -7,7 +7,7 @@ export class SpotifyService {
 
   artistas:any[] = [];
 
-  token:string = "BQA_lNJxEpWdhd1WjdlFVZdRIhqaO0uPwxj1csQ3_N3jVDWBdLBPtzx_JiiuEMEyZrLdhVCqPjXdkJVtpiw";
+  token:string = "BQDfwhIRECMzyukyyba6kY4SqTW0TSrPRWwjNAT71x2UYt4cf7Z4iG6aj1FX2mlcw7NLuk3sa6Or2LTdXH4";
 
   private getHeaders():HttpHeaders{
     let headers =  new HttpHeaders({

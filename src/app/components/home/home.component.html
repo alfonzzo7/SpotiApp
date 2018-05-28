@@ -46,15 +46,27 @@
 </div> -->
 
 <div class="container main-container">
-  <div class="card-columns">
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div *ngIf="error" class="alert alert-danger animated fadeIn">
+    <h3>Error</h3>
+    <p>
+      {{mensajeError}}
+    </p>
+  </div>
+
+  <div *ngIf="!loading" class="card-columns animated fadeIn">
     <div class="card" *ngFor="let cancion of nuevasCanciones">
       <img class="card-img-top" [src]="cancion.images[1].url" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{cancion.name}}</h5>
         <hr>
-        <p class="card-text">
-          <span *ngFor="let artista of cancion.artists" class="badge badge-pill badge-success">{{artista.name}}</span>
-        </p>
+        <div class="row" *ngFor="let artista of cancion.artists">
+          <p class="card-text">
+            <span class="badge badge-pill badge-success">{{artista.name}}</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>

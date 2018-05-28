@@ -16,6 +16,10 @@ hr{
   color: black !important;
 }
 
+.card-text {
+    margin-left: 15px;
+}
+
 .jumbotron{
   background-color: #171717;
 }
